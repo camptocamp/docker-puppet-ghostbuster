@@ -1,0 +1,52 @@
+[
+  {
+    "id": "puppet-ghostbuster",
+    "execute-command": "/puppet-ghostbuster.sh",
+    "command-working-directory": "/",
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "payload",
+        "name": "repository.ssh_url"
+      },
+      {
+        "source": "payload",
+        "name": "name"
+      },
+      {
+        "source": "payload",
+        "name": "after"
+      }
+    ],
+    "trigger-rule":
+    {
+      "or":
+      [
+        {
+          "match":
+          {
+            "type": "payload-hash-sha1",
+            "secret": "%{WEBHOOK_SECRET}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "%{WEBHOOK_SECRET}",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "secret"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
