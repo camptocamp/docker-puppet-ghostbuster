@@ -16,6 +16,11 @@ RUN apt-get update \
 COPY puppet-ghostbuster.json /etc/webhook/puppet-ghostbuster.json
 COPY puppet-ghostbuster.sh /puppet-ghostbuster.sh
 
+# Configure .ssh directory
+RUN mkdir /root/.ssh \
+  && chmod 0600 /root/.ssh \
+  && echo StrictHostKeyChecking no > /root/.ssh/config
+
 VOLUME ["/var/lib/git/"]
 
 COPY /docker-entrypoint.sh /
