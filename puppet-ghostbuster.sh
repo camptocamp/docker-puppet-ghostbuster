@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export REF=$1
 export REPO_NAME=$2
