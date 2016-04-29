@@ -3,6 +3,7 @@
 export REF=$1
 export REPO_NAME=$2
 export REPO_CLONE_URL=$3
+export REPO_OWNER=$4
 
 branch=$(cut -d/ -f3 <<<"${REF}")
 if echo "${BRANCHES}" | grep -q $branch ; then
@@ -12,5 +13,5 @@ if echo "${BRANCHES}" | grep -q $branch ; then
   git fetch
   git checkout $branch
 
-  puppet-ghostbuster -s http://puppetdb:8080
+  puppet-ghostbuster -s http://puppetdb:8080 | gh-create-issues
 fi

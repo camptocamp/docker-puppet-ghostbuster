@@ -16,6 +16,10 @@
       {
         "source": "payload",
         "name": "repository.ssh_url"
+      },
+      {
+        "source": "payload",
+        "name": "repository.owner.name"
       }
     ],
     "trigger-rule":
