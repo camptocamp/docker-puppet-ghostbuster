@@ -11,7 +11,7 @@ if echo "${BRANCHES}" | grep -q $branch ; then
   test -d $REPO_NAME || git clone $REPO_CLONE_URL
   cd $REPO_NAME
   git fetch
-  git checkout $branch
+  git checkout origin/$branch
 
   puppet-ghostbuster -s http://puppetdb:8080 | gh-create-issues
 fi
