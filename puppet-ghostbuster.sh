@@ -13,5 +13,5 @@ if echo "${BRANCHES}" | grep -q $branch ; then
   git fetch
   git checkout origin/$branch
 
-  puppet-ghostbuster -s http://puppetdb:8080 | gh-create-issues
+  find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_files,ghostbuster_templates --log-format '{"title":"[GhostBuster] %{message}","content":"%{fullpath}"}' {} \+ | ruby -e 'puts "[#{$stdin.readlines.join(",").gsub("\n", "")}]"' | gh-create-issues
 fi
