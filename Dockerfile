@@ -8,10 +8,13 @@ ENV LANG=en_US.UTF-8
 
 ENV IRC_NOTIFY_BRANCHES production
 
+ENV GHOSTBUSTER_VERSION 0.7.2
+
 RUN apt-get update \
   && apt-get install -y locales-all ruby \
-  && gem install puppet-ghostbuster --no-ri --no-rdoc \
   && rm -rf /var/lib/apt/lists/*
+
+RUN gem install puppet-ghostbuster --no-ri --no-rdoc --version "${GHOSTBUSTER_VERSION}"
 
 COPY puppet-ghostbuster.json /etc/webhook/puppet-ghostbuster.json
 COPY puppet-ghostbuster.sh /puppet-ghostbuster.sh
