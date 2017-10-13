@@ -40,6 +40,6 @@ RUN mkdir /root/.ssh \
 VOLUME ["/var/lib/git/"]
 
 COPY /docker-entrypoint.sh /
-COPY /gh-create-issues /usr/local/bin/
+COPY /gh-create-issues.sh /usr/local/bin/
 COPY /docker-entrypoint.d/* /docker-entrypoint.d/
 ENTRYPOINT ["/docker-entrypoint.sh"]
