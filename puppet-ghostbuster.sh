@@ -13,5 +13,5 @@ if echo "${BRANCHES}" | grep -q $branch ; then
   git fetch
   git checkout origin/$branch
 
-  HIERA_YAML_PATH=/var/lib/git/$REPO_NAME/hiera.yaml find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_facts,ghostbuster_files,ghostbuster_functions,ghostbuster_hiera_files,ghostbuster_templates,ghostbuster_types --log-format '{"title":"[GhostBuster] %{message}","content":"%{fullpath}"}' {} \+ | ruby -e 'puts "[#{$stdin.readlines.join(",").gsub("\n", "")}]"' | gh-create-issues
+  HIERA_YAML_PATH=/var/lib/git/$REPO_NAME/hiera.yaml find . -type f -exec puppet-lint --only-checks ghostbuster_classes,ghostbuster_defines,ghostbuster_facts,ghostbuster_files,ghostbuster_functions,ghostbuster_hiera_files,ghostbuster_templates,ghostbuster_types --log-format '{"title":"[GhostBuster] %{message}","content":"%{fullpath}"}' {} \+ | ruby -e 'puts "[#{$stdin.readlines.join(",").gsub("\n", "")}]"' | gh-create-issues.sh
 fi
