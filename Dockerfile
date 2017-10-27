@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ruby:2.4.2-jessie
 
 EXPOSE 9000
 
@@ -14,12 +14,12 @@ ENV IRC_NOTIFY_BRANCHES production
 ENV GHOSTBUSTER_VERSION 0.9.0
 
 RUN apt-get update \
-  && apt-get install -y locales-all ruby \
+  && apt-get install -y locales-all \
   && rm -rf /var/lib/apt/lists/*
 
 # Install webhook
 RUN apt-get update \
-    && apt-get -y install git curl \
+    && apt-get -y install git curl jq \
     && apt-get install -y ca-certificates \
     && curl https://storage.googleapis.com/golang/go${GOVERSION}.linux-amd64.tar.gz | tar xzf - \
     && mv /go ${GOROOT} \
